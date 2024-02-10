@@ -1,17 +1,42 @@
-import React from 'react';
-import {ScrollView} from 'react-native';
+import * as React from 'react';
+import {
+  View,
+  Text,
+  Button,
+  StyleSheet,
+  Dimensions,
+  TextInput,
+  Image,
+} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+import {useNavigation} from '@react-navigation/native';
 
 // pages
-import Beranda from './dist/pages/Beranda';
 import Login from './dist/pages/Login';
+import Beranda from './dist/pages/Beranda';
 
-export default function App() {
+function DetailsScreen() {
   return (
-    <>
-      <ScrollView>
-        <Login />
-        <Beranda />
-      </ScrollView>
-    </>
+    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      <Text>Details Screen</Text>
+    </View>
   );
 }
+const Stack = createNativeStackNavigator();
+
+function App() {
+  return (
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Beranda" component={Beranda} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </SafeAreaProvider>
+  );
+}
+
+export default App;

@@ -1,3 +1,4 @@
+import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {
   Button,
@@ -9,7 +10,9 @@ import {
   View,
 } from 'react-native';
 
-const Login = (changePage: any) => {
+const Login = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>LOGIN</Text>
@@ -24,7 +27,11 @@ const Login = (changePage: any) => {
         <TextInput style={styles.input} placeholder="Email" />
         <TextInput style={styles.input} placeholder="Password" />
 
-        <Button title="Submit" color={'#ef4444'} onPress={() => changePage} />
+        <Button
+          title="Submit"
+          color={'#ef4444'}
+          onPress={() => navigation.navigate('Beranda' as never)}
+        />
 
         <Text style={styles.feet}>Create an Account</Text>
       </View>
