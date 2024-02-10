@@ -4,6 +4,7 @@ import {
   Button,
   Dimensions,
   Image,
+  ScrollView,
   StyleSheet,
   Text,
   TextInput,
@@ -14,7 +15,7 @@ const Login = () => {
   const navigation = useNavigation();
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <Text style={styles.title}>LOGIN</Text>
       <Text style={styles.appName}>Warisan Nusantara</Text>
 
@@ -35,7 +36,7 @@ const Login = () => {
 
         <Text style={styles.feet}>Create an Account</Text>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
