@@ -1,6 +1,6 @@
+import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {
-  Button,
   Dimensions,
   Image,
   StyleSheet,
@@ -8,7 +8,10 @@ import {
   TextInput,
   View,
   ScrollView,
+  TouchableOpacity,
 } from 'react-native';
+
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
 const styles = StyleSheet.create({
   headerContainer: {
@@ -59,6 +62,11 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     marginTop: -60,
     borderRadius: 10,
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 2},
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
+    elevation: 5,
   },
 
   //
@@ -73,6 +81,13 @@ const styles = StyleSheet.create({
     height: 100,
     width: 150,
     borderRadius: 5,
+  },
+
+  //
+
+  footer: {
+    textAlign: 'center',
+    marginVertical: 20,
   },
 });
 
@@ -98,6 +113,8 @@ const newsData = [
 ];
 
 const Beranda = () => {
+  const navigation = useNavigation();
+
   return (
     <ScrollView>
       <View style={styles.headerContainer}>
@@ -180,18 +197,24 @@ const Beranda = () => {
             marginBottom: 20,
           }}>
           RAGAM BERITA
+          {/* <Icon name="comment" size={30} color="red" /> */}
         </Text>
 
         {newsData.map(item => (
-          <View key={item.id} style={styles.newsCard}>
+          <TouchableOpacity
+            key={item.id}
+            style={styles.newsCard}
+            onPress={() => navigation.navigate('Detail' as never)}>
             <Image source={item.image} style={styles.newsCardImage} />
             <View style={{flexShrink: 1}}>
               <Text style={{fontWeight: '500'}}>{item.title}</Text>
               <Text style={{marginTop: 5, fontSize: 12}}>{item.date}</Text>
             </View>
-          </View>
+          </TouchableOpacity>
         ))}
       </View>
+
+      <Text style={styles.footer}>Copyright by ALOPE 2024</Text>
     </ScrollView>
   );
 };

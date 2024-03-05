@@ -1,5 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Button,
   Dimensions,
@@ -14,6 +14,38 @@ import {
 const Login = () => {
   const navigation = useNavigation();
 
+  //
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
+
+  const [formError, setFormError] = useState({
+    email: '',
+    password: '',
+  });
+
+  const formSubmit = () => {
+    let validate = {
+      email: '',
+      password: '',
+    };
+
+    if (!formData.email) {
+      validate.email = 'Email harus diisi!';
+    }
+    if (!formData.password) {
+      validate.password = 'Password harus diisi!';
+    }
+
+    const errors = Object.values(validate).filter(value => value !== '');
+    if (errors.length > 0) {
+      setFormError(validate);
+    } else {
+      navigation.navigate('Beranda' as never);
+    }
+  };
+
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.title}>LOGIN</Text>
@@ -25,16 +57,39 @@ const Login = () => {
         style={{
           marginTop: 20,
         }}>
-        <TextInput style={styles.input} placeholder="Email" />
-        <TextInput style={styles.input} placeholder="Password" />
+        <View style={styles.formControl}>
+          <TextInput
+            style={styles.input}
+            placeholder="Email"
+            value={formData.email}
+            onChangeText={text => setFormData({...formData, email: text})}
+          />
+          <Text style={styles.errorMessage}>{formError.email}</Text>
+        </View>
+
+        <View style={styles.formControl}>
+          <TextInput
+            style={styles.input}
+            placeholder="Password"
+            value={formData.password}
+            onChangeText={text => setFormData({...formData, password: text})}
+          />
+          <Text style={styles.errorMessage}>{formError.password}</Text>
+        </View>
 
         <Button
           title="Submit"
           color={'#ef4444'}
-          onPress={() => navigation.navigate('Beranda' as never)}
+          onPress={() => {
+            formSubmit();
+          }}
         />
 
-        <Text style={styles.feet}>Create an Account</Text>
+        <Text
+          style={styles.feet}
+          onPress={() => navigation.navigate('Register' as never)}>
+          Create an Account
+        </Text>
       </View>
     </ScrollView>
   );
@@ -44,7 +99,7 @@ const styles = StyleSheet.create({
   container: {
     padding: 20,
     backgroundColor: 'white',
-    height: Dimensions.get('window').height,
+    minHeight: Dimensions.get('window').height,
   },
   title: {
     textAlign: 'center',
@@ -64,13 +119,21 @@ const styles = StyleSheet.create({
     height: 300,
     marginTop: 30,
   },
+  formControl: {
+    marginBottom: 20,
+  },
   input: {
     borderWidth: 1,
     borderRadius: 5,
     paddingHorizontal: 10,
     paddingVertical: 7,
-    marginBottom: 20,
     borderColor: '#2e2e42',
+  },
+  errorMessage: {
+    color: '#ef4444',
+    fontSize: 12,
+    fontStyle: 'italic',
+    marginTop: 3,
   },
   feet: {
     marginTop: 20,
