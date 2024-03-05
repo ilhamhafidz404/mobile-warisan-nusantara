@@ -9,9 +9,14 @@ import {
   View,
   ScrollView,
   TouchableOpacity,
+  Button,
 } from 'react-native';
 
-import Icon from 'react-native-vector-icons/FontAwesome5';
+import {NavigationContainer} from '@react-navigation/native';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+
+const Tab = createBottomTabNavigator();
 
 const styles = StyleSheet.create({
   headerContainer: {
@@ -112,9 +117,8 @@ const newsData = [
   },
 ];
 
-const Beranda = () => {
+const Coba = () => {
   const navigation = useNavigation();
-
   return (
     <ScrollView>
       <View style={styles.headerContainer}>
@@ -216,6 +220,29 @@ const Beranda = () => {
 
       <Text style={styles.footer}>Copyright by ALOPE 2024</Text>
     </ScrollView>
+  );
+};
+
+const Setting = () => {
+  const navigation = useNavigation();
+  return <Text>Hello</Text>;
+};
+
+const Beranda = () => {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen
+        name="Home"
+        component={Coba}
+        options={{
+          title: 'Warisan Nusantara',
+          headerStyle: {backgroundColor: '#181818'},
+          headerTintColor: '#fff',
+          // headerTransparent: true,
+        }}
+      />
+      <Tab.Screen name="Setting" component={Setting} />
+    </Tab.Navigator>
   );
 };
 

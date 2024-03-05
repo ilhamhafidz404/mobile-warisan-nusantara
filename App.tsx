@@ -31,13 +31,7 @@ function App() {
             name="Beranda"
             component={Beranda}
             options={{
-              title: 'Warisan Nusantara',
-              headerTintColor: '#fff',
-              headerStyle: {backgroundColor: '#181818'},
-              headerBackVisible: false,
-              headerRight: () => (
-                <Button onPress={() => {}} title="==" color="#181818" />
-              ),
+              headerShown: false,
             }}
           />
           <Stack.Screen
@@ -48,6 +42,7 @@ function App() {
               headerTintColor: '#fff',
               headerStyle: {backgroundColor: '#181818'},
               headerBackVisible: true,
+              // headerShown: false,
               headerRight: () => (
                 <Button onPress={() => {}} title="==" color="#181818" />
               ),
