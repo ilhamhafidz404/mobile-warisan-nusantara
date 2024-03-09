@@ -2,13 +2,16 @@ import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {Button} from 'react-native';
 
 // pages
 import Login from './dist/pages/Login';
 import Register from './dist/pages/Register';
-import Beranda from './dist/pages/Beranda';
 import Detail from './dist/pages/Detail';
+import Application from './dist/layouts/Application';
+import Introduce from './dist/pages/Introduce';
+
+// icons
+import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 
 const Stack = createNativeStackNavigator();
 
@@ -17,6 +20,11 @@ function App() {
     <SafeAreaProvider>
       <NavigationContainer>
         <Stack.Navigator>
+          <Stack.Screen
+            name="Introduce"
+            component={Introduce}
+            options={{headerShown: false}}
+          />
           <Stack.Screen
             name="Login"
             component={Login}
@@ -28,8 +36,8 @@ function App() {
             options={{headerShown: false}}
           />
           <Stack.Screen
-            name="Beranda"
-            component={Beranda}
+            name="Application"
+            component={Application}
             options={{
               headerShown: false,
             }}
@@ -38,13 +46,17 @@ function App() {
             name="Detail"
             component={Detail}
             options={{
-              title: 'Warisan Nusantara',
+              title: 'Detail Berita',
               headerTintColor: '#fff',
               headerStyle: {backgroundColor: '#181818'},
               headerBackVisible: true,
-              // headerShown: false,
               headerRight: () => (
-                <Button onPress={() => {}} title="==" color="#181818" />
+                <FontAwesome5Icon
+                  name="bars"
+                  color="#fff"
+                  size={15}
+                  onPress={() => {}}
+                />
               ),
             }}
           />

@@ -25,6 +25,33 @@ const styles = StyleSheet.create({
     position: 'absolute',
     opacity: 0.4,
   },
+  headerText: {
+    position: 'absolute',
+    left: 10,
+    bottom: 85,
+  },
+  headerTextTitle: {
+    fontSize: 25,
+    fontWeight: 'bold',
+    color: 'white',
+  },
+  headerTextDate: {
+    fontSize: 13,
+    color: 'white',
+    marginTop: 10,
+  },
+  headerBadgeCategoryText: {
+    fontSize: 11,
+    color: 'white',
+  },
+  headerBadgeCategory: {
+    backgroundColor: '#ef4444',
+    alignSelf: 'flex-start',
+    alignItems: 'center',
+    paddingHorizontal: 10,
+    paddingVertical: 2,
+    borderRadius: 100,
+  },
 
   //
 
@@ -40,6 +67,24 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
     elevation: 5,
   },
+  author: {
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'row',
+    gap: 10,
+  },
+  authorImage: {
+    width: 45,
+    height: 45,
+    borderRadius: 100,
+  },
+  authorName: {
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+  paragraph: {
+    marginTop: 10,
+  },
 
   //
 
@@ -54,116 +99,54 @@ const Detail = () => {
     <ScrollView>
       <View style={styles.headerContainer}>
         <Image
-          source={require('./../images/header.jpg')}
+          source={require('./../images/news/tari.jpeg')}
           style={styles.headerImage}
         />
         <View style={styles.headerOverflow} />
-        <View
-          style={{
-            position: 'absolute',
-            left: 10,
-            bottom: 85,
-          }}>
-          <View
-            style={{
-              backgroundColor: '#fd6b87',
-              alignSelf: 'flex-start',
-              alignItems: 'center',
-              paddingHorizontal: 10,
-              paddingVertical: 2,
-              borderRadius: 100,
-            }}>
-            <Text
-              style={{
-                fontSize: 11,
-                color: 'white',
-              }}>
-              Destinasi Wisata
-            </Text>
+        <View style={styles.headerText}>
+          <View style={styles.headerBadgeCategory}>
+            <Text style={styles.headerBadgeCategoryText}>Destinasi Wisata</Text>
           </View>
-          <Text
-            style={{
-              fontSize: 25,
-              fontWeight: 'bold',
-              color: 'white',
-            }}>
-            Waduk Darma Objek Wisata Kuningan
+          <Text style={styles.headerTextTitle}>
+            Pagelarang Seni Tari Budaya di Semarang
           </Text>
-          <Text
-            style={{
-              fontSize: 13,
-              color: 'white',
-              marginTop: 10,
-            }}>
-            12 Februari 2024
-          </Text>
+          <Text style={styles.headerTextDate}>12 Februari 2024</Text>
         </View>
       </View>
 
       <View style={styles.main}>
-        <View
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            flexDirection: 'row',
-            gap: 10,
-          }}>
+        <View style={styles.author}>
           <Image
             source={require('./../images/profile.jpg')}
-            style={{
-              width: 45,
-              height: 45,
-              borderRadius: 100,
-            }}
+            style={styles.authorImage}
           />
-          <Text
-            style={{
-              fontWeight: 'bold',
-              fontSize: 16,
-            }}>
-            Ilham Hafidz
-          </Text>
+          <Text style={styles.authorName}>Ilham Hafidz</Text>
         </View>
-        <Text
-          style={{
-            marginTop: 20,
-          }}>
+        <Text style={styles.paragraph}>
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Reiciendis
           placeat expedita blanditiis libero qui, illum quaerat iste incidunt
           cumque ipsum ab esse id quia eveniet autem consectetur reprehenderit
           odio ipsam?
         </Text>
-        <Text
-          style={{
-            marginTop: 10,
-          }}>
+        <Text style={styles.paragraph}>
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Reiciendis
           placeat expedita blanditiis libero qui, illum quaerat iste incidunt
           cumque ipsum ab esse id quia eveniet autem consectetur reprehenderit
           odio ipsam?
         </Text>
-        <Text
-          style={{
-            marginTop: 10,
-          }}>
+        <Text style={styles.paragraph}>
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Reiciendis
           placeat expedita blanditiis libero qui, illum quaerat iste incidunt
           cumque ipsum ab esse id quia eveniet autem consectetur reprehenderit
           odio ipsam?
         </Text>
-        <Text
-          style={{
-            marginTop: 10,
-          }}>
+        <Text style={styles.paragraph}>
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Reiciendis
           placeat expedita blanditiis libero qui, illum quaerat iste incidunt
           cumque ipsum ab esse id quia eveniet autem consectetur reprehenderit
           odio ipsam?
         </Text>
-        <Text
-          style={{
-            marginTop: 10,
-          }}>
+        <Text style={styles.paragraph}>
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Reiciendis
           placeat expedita blanditiis libero qui, illum quaerat iste incidunt
           cumque ipsum ab esse id quia eveniet autem consectetur reprehenderit

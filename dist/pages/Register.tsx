@@ -28,12 +28,11 @@ const Register = () => {
         <TextInput style={styles.input} placeholder="Name" />
         <TextInput style={styles.input} placeholder="Email" />
         <TextInput style={styles.input} placeholder="Password" />
-        {/* <TextInput style={styles.input} placeholder="Confirm Password" /> */}
 
         <Button
           title="Submit"
           color={'#ef4444'}
-          onPress={() => navigation.navigate('Beranda' as never)}
+          onPress={() => navigation.navigate('Application' as never)}
         />
 
         <Text
@@ -50,7 +49,6 @@ const styles = StyleSheet.create({
   container: {
     padding: 20,
     backgroundColor: 'white',
-    // minHeight: Dimensions.get('window').height,
   },
   title: {
     textAlign: 'center',

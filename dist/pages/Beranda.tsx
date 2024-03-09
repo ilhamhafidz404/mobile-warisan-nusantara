@@ -1,5 +1,4 @@
 import {useNavigation} from '@react-navigation/native';
-import React from 'react';
 import {
   Dimensions,
   Image,
@@ -9,14 +8,140 @@ import {
   View,
   ScrollView,
   TouchableOpacity,
-  Button,
 } from 'react-native';
 
-import {NavigationContainer} from '@react-navigation/native';
-import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+const newsData = [
+  {
+    id: 1,
+    image: require('./../images/news/tari.jpeg'),
+    title: 'Pagelaran Seni Tari Pelajar di Semarang',
+    date: '2 Februari 2024',
+  },
+  {
+    id: 2,
+    image: require('./../images/news/kebaya.jpeg'),
+    title: 'Mari Kenali Kebaya, Pakai Adat Sunda',
+    date: '2 Februari 2024',
+  },
+  {
+    id: 3,
+    image: require('./../images/news/topeng.jpeg'),
+    title: 'Kenalkan Topeng Panji Kepada Pelajar Lewat Lomba Mewarnai',
+    date: '2 Februari 2024',
+  },
+];
 
-const Tab = createBottomTabNavigator();
+// icons
+import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import FontistoIcon from 'react-native-vector-icons/Fontisto';
+import FontAwesome6Icon from 'react-native-vector-icons/FontAwesome6';
+import FeatherIcon from 'react-native-vector-icons/Feather';
+
+const Beranda = () => {
+  const navigation = useNavigation();
+  return (
+    <ScrollView>
+      <View style={styles.headerContainer}>
+        <Image
+          source={require('./../images/header.jpg')}
+          style={styles.headerImage}
+        />
+        <View style={styles.headerOverflow} />
+        <View style={styles.headerItemContainer}>
+          <View
+            style={{
+              position: 'relative',
+            }}>
+            <TextInput style={styles.headerSearch} placeholder="Search..." />
+            <FeatherIcon
+              name="search"
+              size={25}
+              color={'#ef4444'}
+              style={styles.headerSearchIcon}
+            />
+          </View>
+          <View style={styles.headerLinksContainer}>
+            <View
+              style={{
+                alignItems: 'center',
+              }}>
+              <View style={styles.headerLinksItem}>
+                <MaterialCommunityIcon
+                  name="human-female-dance"
+                  size={25}
+                  color={'white'}
+                />
+              </View>
+              <Text style={styles.headerLinksItemText}>Tari</Text>
+            </View>
+
+            <View
+              style={{
+                alignItems: 'center',
+              }}>
+              <View style={styles.headerLinksItem}>
+                <FontistoIcon name="music-note" size={25} color={'white'} />
+              </View>
+              <Text style={styles.headerLinksItemText}>Musik</Text>
+            </View>
+
+            <View
+              style={{
+                alignItems: 'center',
+              }}>
+              <View style={styles.headerLinksItem}>
+                <FontAwesome6Icon name="bowl-food" size={25} color={'white'} />
+              </View>
+              <Text style={styles.headerLinksItemText}>Makanan</Text>
+            </View>
+
+            <View
+              style={{
+                alignItems: 'center',
+              }}>
+              <View style={styles.headerLinksItem}>
+                <MaterialIcon name="architecture" size={25} color={'white'} />
+              </View>
+              <Text style={styles.headerLinksItemText}>Arsitektur</Text>
+            </View>
+          </View>
+        </View>
+      </View>
+
+      <View style={styles.main}>
+        <View style={styles.sectionTitle}>
+          <View style={styles.sectionTitleIcon}>
+            <MaterialIcon name="article" size={15} color={'#fff'} />
+          </View>
+          <Text
+            style={{
+              fontSize: 20,
+              fontWeight: 'bold',
+              color: '#333',
+            }}>
+            Ragam Berita
+          </Text>
+        </View>
+
+        {newsData.map(item => (
+          <TouchableOpacity
+            key={item.id}
+            style={styles.newsCard}
+            onPress={() => navigation.navigate('Detail' as never)}>
+            <Image source={item.image} style={styles.newsCardImage} />
+            <View style={{flexShrink: 1}}>
+              <Text style={{fontWeight: '500'}}>{item.title}</Text>
+              <Text style={{marginTop: 5, fontSize: 12}}>{item.date}</Text>
+            </View>
+          </TouchableOpacity>
+        ))}
+      </View>
+
+      <Text style={styles.footer}>Copyright by ALOPE 2024</Text>
+    </ScrollView>
+  );
+};
 
 const styles = StyleSheet.create({
   headerContainer: {
@@ -47,11 +172,25 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     paddingHorizontal: 25,
   },
+  headerSearchIcon: {
+    position: 'absolute',
+    right: 20,
+    top: '50%',
+    transform: [{translateY: -13}],
+  },
   headerLinksContainer: {
     marginTop: 20,
     flexDirection: 'row',
     justifyContent: 'center',
     gap: 25,
+  },
+  headerLinksItem: {
+    width: 50,
+    height: 50,
+    backgroundColor: '#ef4444',
+    borderRadius: 100,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   headerLinksItemText: {
     fontWeight: 'bold',
@@ -72,6 +211,20 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 3,
     elevation: 5,
+  },
+  sectionTitle: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 7,
+    marginBottom: 20,
+  },
+  sectionTitleIcon: {
+    width: 27,
+    height: 27,
+    borderRadius: 200,
+    backgroundColor: '#ef4444',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 
   //
@@ -95,155 +248,5 @@ const styles = StyleSheet.create({
     marginVertical: 20,
   },
 });
-
-const newsData = [
-  {
-    id: 1,
-    image: require('./../images/header.jpg'),
-    title: 'WADUK DARMA JADI DESTINASI PILIHAN JABAR',
-    date: '2 Februari 2024',
-  },
-  {
-    id: 2,
-    image: require('./../images/header.jpg'),
-    title: 'WADUK DARMA JADI DESTINASI PILIHAN JABAR',
-    date: '2 Februari 2024',
-  },
-  {
-    id: 3,
-    image: require('./../images/header.jpg'),
-    title: 'WADUK DARMA JADI DESTINASI PILIHAN JABAR',
-    date: '2 Februari 2024',
-  },
-];
-
-const Coba = () => {
-  const navigation = useNavigation();
-  return (
-    <ScrollView>
-      <View style={styles.headerContainer}>
-        <Image
-          source={require('./../images/header.jpg')}
-          style={styles.headerImage}
-        />
-        <View style={styles.headerOverflow} />
-        <View style={styles.headerItemContainer}>
-          <TextInput style={styles.headerSearch} placeholder="Search..." />
-          <View style={styles.headerLinksContainer}>
-            <View
-              style={{
-                alignItems: 'center',
-              }}>
-              <View
-                style={{
-                  width: 50,
-                  height: 50,
-                  backgroundColor: '#51d1fc',
-                  borderRadius: 100,
-                }}
-              />
-              <Text style={styles.headerLinksItemText}>Tari</Text>
-            </View>
-
-            <View
-              style={{
-                alignItems: 'center',
-              }}>
-              <View
-                style={{
-                  width: 50,
-                  height: 50,
-                  backgroundColor: '#fdb865',
-                  borderRadius: 100,
-                }}
-              />
-              <Text style={styles.headerLinksItemText}>Musik</Text>
-            </View>
-
-            <View
-              style={{
-                alignItems: 'center',
-              }}>
-              <View
-                style={{
-                  width: 50,
-                  height: 50,
-                  backgroundColor: '#fd6b87',
-                  borderRadius: 100,
-                }}
-              />
-              <Text style={styles.headerLinksItemText}>Makanan</Text>
-            </View>
-
-            <View
-              style={{
-                alignItems: 'center',
-              }}>
-              <View
-                style={{
-                  width: 50,
-                  height: 50,
-                  backgroundColor: '#a980dd',
-                  borderRadius: 100,
-                }}
-              />
-              <Text style={styles.headerLinksItemText}>Event</Text>
-            </View>
-          </View>
-        </View>
-      </View>
-
-      <View style={styles.main}>
-        <Text
-          style={{
-            fontSize: 15,
-            fontWeight: 'bold',
-            marginBottom: 20,
-          }}>
-          RAGAM BERITA
-          {/* <Icon name="comment" size={30} color="red" /> */}
-        </Text>
-
-        {newsData.map(item => (
-          <TouchableOpacity
-            key={item.id}
-            style={styles.newsCard}
-            onPress={() => navigation.navigate('Detail' as never)}>
-            <Image source={item.image} style={styles.newsCardImage} />
-            <View style={{flexShrink: 1}}>
-              <Text style={{fontWeight: '500'}}>{item.title}</Text>
-              <Text style={{marginTop: 5, fontSize: 12}}>{item.date}</Text>
-            </View>
-          </TouchableOpacity>
-        ))}
-      </View>
-
-      <Text style={styles.footer}>Copyright by ALOPE 2024</Text>
-    </ScrollView>
-  );
-};
-
-const Setting = () => {
-  const navigation = useNavigation();
-  return <Text>Hello</Text>;
-};
-
-const Beranda = () => {
-  return (
-    <Tab.Navigator>
-      <Tab.Screen
-        name="Home"
-        component={Coba}
-        options={{
-          title: 'Warisan Nusantara',
-          headerStyle: {backgroundColor: '#181818'},
-          headerTintColor: '#fff',
-          // headerTransparent: true,
-        }}
-      />
-      <Tab.Screen name="Setting" component={Setting} />
-    </Tab.Navigator>
-  );
-};
 
 export default Beranda;

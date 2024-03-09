@@ -42,7 +42,7 @@ const Login = () => {
     if (errors.length > 0) {
       setFormError(validate);
     } else {
-      navigation.navigate('Beranda' as never);
+      navigation.navigate('Application' as never);
     }
   };
 
@@ -100,6 +100,7 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: 'white',
     minHeight: Dimensions.get('window').height,
+    marginBottom: 20,
   },
   title: {
     textAlign: 'center',
@@ -137,6 +138,7 @@ const styles = StyleSheet.create({
   },
   feet: {
     marginTop: 20,
+    marginBottom: 100,
     fontWeight: 'bold',
     color: '#ef4444',
     textAlign: 'center',
