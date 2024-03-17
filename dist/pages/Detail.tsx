@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Dimensions,
   Image,
@@ -7,6 +7,97 @@ import {
   View,
   ScrollView,
 } from 'react-native';
+
+// apis
+import {getNewsById} from '../api/News';
+
+// tools
+import {formatDate} from '../tools/dateFormat';
+
+interface NewsData {
+  id?: number;
+  title?: string;
+  category?: string;
+  date?: string;
+  author?: string;
+  author_photo?: string;
+  body?: string;
+}
+
+const Detail = () => {
+  const [data, setData] = useState<NewsData>({});
+
+  const getDataNewsById = async () => {
+    let result = await getNewsById();
+
+    if (result) {
+      setData(result.data.Data);
+      console.log(result.data.Data);
+    }
+  };
+
+  useEffect(() => {
+    getDataNewsById();
+  }, []);
+
+  return (
+    <ScrollView>
+      <View style={styles.headerContainer}>
+        <Image
+          source={require('./../images/news/tari.jpeg')}
+          style={styles.headerImage}
+        />
+        <View style={styles.headerOverflow} />
+        <View style={styles.headerText}>
+          <View style={styles.headerBadgeCategory}>
+            <Text style={styles.headerBadgeCategoryText}>{data.category}</Text>
+          </View>
+          <Text style={styles.headerTextTitle}>{data.title}</Text>
+          <Text style={styles.headerTextDate}>{formatDate(data.date)}</Text>
+        </View>
+      </View>
+
+      <View style={styles.main}>
+        <View style={styles.author}>
+          <Image
+            source={{
+              uri: data.author_photo,
+            }}
+            style={styles.authorImage}
+          />
+          <Text style={styles.authorName}>{data.author}</Text>
+        </View>
+        <Text style={styles.paragraph}>{data.body}</Text>
+        <Text style={styles.paragraph}>
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Reiciendis
+          placeat expedita blanditiis libero qui, illum quaerat iste incidunt
+          cumque ipsum ab esse id quia eveniet autem consectetur reprehenderit
+          odio ipsam?
+        </Text>
+        <Text style={styles.paragraph}>
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Reiciendis
+          placeat expedita blanditiis libero qui, illum quaerat iste incidunt
+          cumque ipsum ab esse id quia eveniet autem consectetur reprehenderit
+          odio ipsam?
+        </Text>
+        <Text style={styles.paragraph}>
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Reiciendis
+          placeat expedita blanditiis libero qui, illum quaerat iste incidunt
+          cumque ipsum ab esse id quia eveniet autem consectetur reprehenderit
+          odio ipsam?
+        </Text>
+        <Text style={styles.paragraph}>
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Reiciendis
+          placeat expedita blanditiis libero qui, illum quaerat iste incidunt
+          cumque ipsum ab esse id quia eveniet autem consectetur reprehenderit
+          odio ipsam?
+        </Text>
+      </View>
+
+      <Text style={styles.footer}>Copyright by ALOPE 2024</Text>
+    </ScrollView>
+  );
+};
 
 const styles = StyleSheet.create({
   headerContainer: {
@@ -93,70 +184,5 @@ const styles = StyleSheet.create({
     marginVertical: 20,
   },
 });
-
-const Detail = () => {
-  return (
-    <ScrollView>
-      <View style={styles.headerContainer}>
-        <Image
-          source={require('./../images/news/tari.jpeg')}
-          style={styles.headerImage}
-        />
-        <View style={styles.headerOverflow} />
-        <View style={styles.headerText}>
-          <View style={styles.headerBadgeCategory}>
-            <Text style={styles.headerBadgeCategoryText}>Destinasi Wisata</Text>
-          </View>
-          <Text style={styles.headerTextTitle}>
-            Pagelarang Seni Tari Budaya di Semarang
-          </Text>
-          <Text style={styles.headerTextDate}>12 Februari 2024</Text>
-        </View>
-      </View>
-
-      <View style={styles.main}>
-        <View style={styles.author}>
-          <Image
-            source={require('./../images/profile.jpg')}
-            style={styles.authorImage}
-          />
-          <Text style={styles.authorName}>Ilham Hafidz</Text>
-        </View>
-        <Text style={styles.paragraph}>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Reiciendis
-          placeat expedita blanditiis libero qui, illum quaerat iste incidunt
-          cumque ipsum ab esse id quia eveniet autem consectetur reprehenderit
-          odio ipsam?
-        </Text>
-        <Text style={styles.paragraph}>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Reiciendis
-          placeat expedita blanditiis libero qui, illum quaerat iste incidunt
-          cumque ipsum ab esse id quia eveniet autem consectetur reprehenderit
-          odio ipsam?
-        </Text>
-        <Text style={styles.paragraph}>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Reiciendis
-          placeat expedita blanditiis libero qui, illum quaerat iste incidunt
-          cumque ipsum ab esse id quia eveniet autem consectetur reprehenderit
-          odio ipsam?
-        </Text>
-        <Text style={styles.paragraph}>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Reiciendis
-          placeat expedita blanditiis libero qui, illum quaerat iste incidunt
-          cumque ipsum ab esse id quia eveniet autem consectetur reprehenderit
-          odio ipsam?
-        </Text>
-        <Text style={styles.paragraph}>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Reiciendis
-          placeat expedita blanditiis libero qui, illum quaerat iste incidunt
-          cumque ipsum ab esse id quia eveniet autem consectetur reprehenderit
-          odio ipsam?
-        </Text>
-      </View>
-
-      <Text style={styles.footer}>Copyright by ALOPE 2024</Text>
-    </ScrollView>
-  );
-};
 
 export default Detail;

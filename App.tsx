@@ -12,6 +12,7 @@ import Introduce from './dist/pages/Introduce';
 
 // icons
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
+import DetailCategory from './dist/pages/DetailCategory';
 
 const Stack = createNativeStackNavigator();
 
@@ -47,6 +48,24 @@ function App() {
             component={Detail}
             options={{
               title: 'Detail Berita',
+              headerTintColor: '#fff',
+              headerStyle: {backgroundColor: '#181818'},
+              headerBackVisible: true,
+              headerRight: () => (
+                <FontAwesome5Icon
+                  name="bars"
+                  color="#fff"
+                  size={15}
+                  onPress={() => {}}
+                />
+              ),
+            }}
+          />
+          <Stack.Screen
+            name="DetailCategory"
+            component={DetailCategory}
+            options={{
+              title: 'List Tari Daerah',
               headerTintColor: '#fff',
               headerStyle: {backgroundColor: '#181818'},
               headerBackVisible: true,

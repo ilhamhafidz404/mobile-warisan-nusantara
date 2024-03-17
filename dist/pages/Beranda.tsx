@@ -1,4 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
+import {useEffect, useState} from 'react';
 import {
   Dimensions,
   Image,
@@ -10,27 +11,6 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-const newsData = [
-  {
-    id: 1,
-    image: require('./../images/news/tari.jpeg'),
-    title: 'Pagelaran Seni Tari Pelajar di Semarang',
-    date: '2 Februari 2024',
-  },
-  {
-    id: 2,
-    image: require('./../images/news/kebaya.jpeg'),
-    title: 'Mari Kenali Kebaya, Pakai Adat Sunda',
-    date: '2 Februari 2024',
-  },
-  {
-    id: 3,
-    image: require('./../images/news/topeng.jpeg'),
-    title: 'Kenalkan Topeng Panji Kepada Pelajar Lewat Lomba Mewarnai',
-    date: '2 Februari 2024',
-  },
-];
-
 // icons
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
@@ -38,8 +18,35 @@ import FontistoIcon from 'react-native-vector-icons/Fontisto';
 import FontAwesome6Icon from 'react-native-vector-icons/FontAwesome6';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 
+// apis
+import {getNews} from '../api/News';
+
+// tools
+import {formatDate} from '../tools/dateFormat';
+
+// interfaces
+interface NewsItem {
+  image: string;
+  title: string;
+  date: string;
+}
+
 const Beranda = () => {
   const navigation = useNavigation();
+
+  const [newsData, setNewsData] = useState<NewsItem[]>([]);
+
+  const getDataNewsData = async () => {
+    let result = await getNews();
+    if (result) {
+      setNewsData(result.data.Data);
+    }
+  };
+
+  useEffect(() => {
+    getDataNewsData();
+  }, []);
+
   return (
     <ScrollView>
       <View style={styles.headerContainer}>
@@ -62,9 +69,12 @@ const Beranda = () => {
             />
           </View>
           <View style={styles.headerLinksContainer}>
-            <View
+            <TouchableOpacity
               style={{
                 alignItems: 'center',
+              }}
+              onPress={() => {
+                navigation.navigate('DetailCategory' as never);
               }}>
               <View style={styles.headerLinksItem}>
                 <MaterialCommunityIcon
@@ -74,37 +84,46 @@ const Beranda = () => {
                 />
               </View>
               <Text style={styles.headerLinksItemText}>Tari</Text>
-            </View>
+            </TouchableOpacity>
 
-            <View
+            <TouchableOpacity
               style={{
                 alignItems: 'center',
+              }}
+              onPress={() => {
+                navigation.navigate('DetailCategory' as never);
               }}>
               <View style={styles.headerLinksItem}>
                 <FontistoIcon name="music-note" size={25} color={'white'} />
               </View>
               <Text style={styles.headerLinksItemText}>Musik</Text>
-            </View>
+            </TouchableOpacity>
 
-            <View
+            <TouchableOpacity
               style={{
                 alignItems: 'center',
+              }}
+              onPress={() => {
+                navigation.navigate('DetailCategory' as never);
               }}>
               <View style={styles.headerLinksItem}>
                 <FontAwesome6Icon name="bowl-food" size={25} color={'white'} />
               </View>
               <Text style={styles.headerLinksItemText}>Makanan</Text>
-            </View>
+            </TouchableOpacity>
 
-            <View
+            <TouchableOpacity
               style={{
                 alignItems: 'center',
+              }}
+              onPress={() => {
+                navigation.navigate('DetailCategory' as never);
               }}>
               <View style={styles.headerLinksItem}>
                 <MaterialIcon name="architecture" size={25} color={'white'} />
               </View>
               <Text style={styles.headerLinksItemText}>Arsitektur</Text>
-            </View>
+            </TouchableOpacity>
           </View>
         </View>
       </View>
@@ -126,13 +145,22 @@ const Beranda = () => {
 
         {newsData.map(item => (
           <TouchableOpacity
-            key={item.id}
+            key={item.title}
             style={styles.newsCard}
             onPress={() => navigation.navigate('Detail' as never)}>
-            <Image source={item.image} style={styles.newsCardImage} />
+            <Image
+              source={{
+                uri: item.image,
+              }}
+              style={styles.newsCardImage}
+            />
             <View style={{flexShrink: 1}}>
-              <Text style={{fontWeight: '500'}}>{item.title}</Text>
-              <Text style={{marginTop: 5, fontSize: 12}}>{item.date}</Text>
+              <Text style={{fontWeight: '500', color: 'black'}}>
+                {item.title}
+              </Text>
+              <Text style={{marginTop: 5, fontSize: 12}}>
+                {formatDate(item.date)}
+              </Text>
             </View>
           </TouchableOpacity>
         ))}

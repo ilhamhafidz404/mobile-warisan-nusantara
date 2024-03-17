@@ -30,9 +30,59 @@ export default function Account() {
             source={require('./../images/profile.jpg')}
             style={styles.userProfile}
           />
-          <View>
-            <Text style={styles.userName}>Ilham Hafidz</Text>
-            <Text style={styles.userRole}>Pengguna</Text>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}>
+            <View>
+              <Text style={styles.userName}>Ilham Hafidz</Text>
+              <Text style={styles.userRole}>Pengguna</Text>
+            </View>
+          </View>
+          <View
+            style={{
+              position: 'absolute',
+              right: 20,
+              top: 100,
+              transform: [{translateY: -27}],
+              flexDirection: 'row',
+              gap: 7,
+            }}>
+            <View
+              style={{
+                backgroundColor: '#3b5998',
+                width: 27,
+                height: 27,
+                justifyContent: 'center',
+                alignItems: 'center',
+                borderRadius: 100,
+              }}>
+              <FaIcon name="facebook" color={'#fff'} size={15} />
+            </View>
+            <View
+              style={{
+                backgroundColor: '#1DA1F2',
+                width: 27,
+                height: 27,
+                justifyContent: 'center',
+                alignItems: 'center',
+                borderRadius: 100,
+              }}>
+              <FaIcon name="twitter" color={'#fff'} size={15} />
+            </View>
+            <View
+              style={{
+                backgroundColor: '#C13584',
+                width: 27,
+                height: 27,
+                justifyContent: 'center',
+                alignItems: 'center',
+                borderRadius: 100,
+              }}>
+              <FaIcon name="instagram" color={'#fff'} size={15} />
+            </View>
           </View>
         </View>
       </View>
@@ -145,7 +195,7 @@ const styles = StyleSheet.create({
 
   main: {
     backgroundColor: 'white',
-    marginHorizontal: 20,
+    marginHorizontal: 10,
     paddingHorizontal: 20,
     paddingVertical: 20,
     marginTop: -40,
