@@ -32,7 +32,6 @@ const Detail = () => {
 
     if (result) {
       setData(result.data.Data);
-      console.log(result.data.Data);
     }
   };
 
@@ -61,7 +60,7 @@ const Detail = () => {
         <View style={styles.author}>
           <Image
             source={{
-              uri: data.author_photo,
+              uri: 'https://cdn.vox-cdn.com/thumbor/T3bE8Mhr14dqhJDkvOMz56EBHuo=/0x0:4000x6000/1120x0/filters:focal(0x0:4000x6000):format(webp):no_upscale()/cdn.vox-cdn.com/uploads/chorus_asset/file/9637713/Fillipovic__Jill__cr_Gary_He_.jpeg',
             }}
             style={styles.authorImage}
           />

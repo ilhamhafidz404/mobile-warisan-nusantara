@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-export const getTari = async () => {
+export const getEvent = async () => {
   try {
     let result = await axios.get(
-      `https://run.mocky.io/v3/8ed1dbf1-d4c5-4283-9c93-89558ef33131`,
+      `https://run.mocky.io/v3/cc2b0447-c60e-4b99-b91d-82bcc52a2faf`,
     );
 
     if (result) {

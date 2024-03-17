@@ -45,13 +45,15 @@ export default function DetailCategory() {
   const [isFocus, setIsFocus] = useState(false);
 
   const [data, setData] = useState<TariItem[]>([]);
+  const [loading, setLoading] = useState(false);
 
   const getDataTari = async () => {
+    setLoading(true);
     let result = await getTari();
 
     if (result) {
       setData(result.data.Data);
-      console.log(result.data.Data[0]);
+      setLoading(false);
     }
   };
 
@@ -61,15 +63,7 @@ export default function DetailCategory() {
 
   return (
     <>
-      <View
-        style={{
-          padding: 10,
-          backgroundColor: '#eaeaea',
-          flexDirection: 'row',
-          gap: 10,
-          borderBottomColor: 'white',
-          borderBottomWidth: 7,
-        }}>
+      <View style={styles.filterContainer}>
         <Dropdown
           style={[styles.dropdown, isFocus && {borderColor: '#ef4444'}]}
           placeholderStyle={styles.placeholderStyle}
@@ -99,77 +93,64 @@ export default function DetailCategory() {
             />
           )}
         />
-        <TouchableOpacity
-          style={{
-            width: 50,
-            height: 50,
-            backgroundColor: '#ef4444',
-            alignItems: 'center',
-            justifyContent: 'center',
-            borderRadius: 7,
-          }}>
+        <TouchableOpacity style={styles.filterButton}>
           <FontAwesome5Icon name="search" size={17} color={'#fff'} />
         </TouchableOpacity>
       </View>
-      <ScrollView
-        style={{
-          paddingHorizontal: 10,
-          paddingBottom: 40,
-          backgroundColor: 'white',
-        }}>
-        <View
-          style={{
-            marginBottom: 30,
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            marginTop: 10,
-          }}>
+      <ScrollView style={styles.container}>
+        {loading ? (
+          ''
+        ) : (
           <View
             style={{
+              marginBottom: 30,
               flexDirection: 'row',
               alignItems: 'center',
-              gap: 10,
+              justifyContent: 'space-between',
+              marginTop: 10,
             }}>
-            <View>
-              <FontAwesome5Icon
-                name="info-circle"
-                color={'#ef4444'}
-                size={25}
-              />
-            </View>
-            <Text
+            <View
               style={{
-                color: 'black',
+                flexDirection: 'row',
+                alignItems: 'center',
+                gap: 10,
               }}>
+              <View>
+                <FontAwesome5Icon
+                  name="info-circle"
+                  color={'#ef4444'}
+                  size={25}
+                />
+              </View>
               <Text
                 style={{
-                  fontWeight: 'bold',
-                  fontSize: 20,
+                  color: 'black',
                 }}>
-                {data.length}
-              </Text>{' '}
-              Tarian Daerah Terlihat
-            </Text>
+                <Text
+                  style={{
+                    fontWeight: 'bold',
+                    fontSize: 20,
+                  }}>
+                  {data.length}
+                </Text>{' '}
+                Tarian Daerah Terlihat
+              </Text>
+            </View>
+
+            <TouchableOpacity>
+              <MaterialCommunityIcon
+                name="dots-horizontal"
+                size={25}
+                color={'#333'}
+              />
+            </TouchableOpacity>
           </View>
-          <TouchableOpacity>
-            <MaterialCommunityIcon
-              name="dots-horizontal"
-              size={25}
-              color={'#333'}
-            />
-          </TouchableOpacity>
-        </View>
+        )}
 
         {data.map((item, index) => (
           <TouchableOpacity
             key={index}
-            style={{
-              flexDirection: 'row',
-              gap: 15,
-              alignItems: 'center',
-              marginBottom: 10,
-            }}
+            style={styles.card}
             onPress={() => {
               navigation.navigate('Detail' as never);
             }}>
@@ -177,43 +158,16 @@ export default function DetailCategory() {
               source={{
                 uri: item.image,
               }}
-              style={{
-                width: 130,
-                height: 100,
-                borderRadius: 5,
-              }}
+              style={styles.cardImage}
             />
             <View>
-              <Text
-                style={{
-                  fontWeight: 'bold',
-                  fontSize: 20,
-                  color: 'black',
-                }}>
-                {item.name}
-              </Text>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  gap: 7,
-                }}>
+              <Text style={styles.cardTitle}>{item.name}</Text>
+              <View style={styles.cardSubtitle}>
                 <FontAwesome5Icon name="map-marked-alt" />
                 <Text>{item.from}</Text>
               </View>
             </View>
-            <TouchableOpacity
-              onPress={() => {}}
-              style={{
-                backgroundColor: '#eaeaea',
-                width: 20,
-                height: 20,
-                alignItems: 'center',
-                justifyContent: 'center',
-                borderRadius: 200,
-                position: 'absolute',
-                right: 10,
-              }}>
+            <TouchableOpacity onPress={() => {}} style={styles.cardChevron}>
               <FontAwesome5Icon name="chevron-right" />
             </TouchableOpacity>
           </TouchableOpacity>
@@ -227,7 +181,7 @@ export default function DetailCategory() {
             style={{
               textAlign: 'center',
             }}>
-            Anda sudah mencapai akhir
+            {loading ? 'Loading...' : 'Anda sudah mencapai akhir'}
           </Text>
         </View>
       </ScrollView>
@@ -236,9 +190,27 @@ export default function DetailCategory() {
 }
 
 const styles = StyleSheet.create({
+  filterContainer: {
+    padding: 10,
+    backgroundColor: '#eaeaea',
+    flexDirection: 'row',
+    gap: 10,
+    borderBottomColor: 'white',
+    borderBottomWidth: 7,
+  },
+  filterButton: {
+    width: 50,
+    height: 50,
+    backgroundColor: '#ef4444',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 7,
+  },
+  //
   container: {
+    paddingHorizontal: 10,
+    paddingBottom: 40,
     backgroundColor: 'white',
-    padding: 16,
   },
   dropdown: {
     height: 50,
@@ -274,5 +246,38 @@ const styles = StyleSheet.create({
   inputSearchStyle: {
     height: 40,
     fontSize: 16,
+  },
+
+  //
+  card: {
+    flexDirection: 'row',
+    gap: 15,
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  cardImage: {
+    width: 130,
+    height: 100,
+    borderRadius: 5,
+  },
+  cardTitle: {
+    fontWeight: 'bold',
+    fontSize: 20,
+    color: 'black',
+  },
+  cardSubtitle: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 7,
+  },
+  cardChevron: {
+    backgroundColor: '#eaeaea',
+    width: 20,
+    height: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 200,
+    position: 'absolute',
+    right: 10,
   },
 });

@@ -24,6 +24,7 @@ const Register = () => {
       <View
         style={{
           marginTop: 20,
+          marginBottom: 50,
         }}>
         <TextInput style={styles.input} placeholder="Name" />
         <TextInput style={styles.input} placeholder="Email" />

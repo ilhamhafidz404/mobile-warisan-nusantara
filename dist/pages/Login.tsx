@@ -11,6 +11,8 @@ import {
   View,
 } from 'react-native';
 
+// apis
+
 const Login = () => {
   const navigation = useNavigation();
 
@@ -42,7 +44,12 @@ const Login = () => {
     if (errors.length > 0) {
       setFormError(validate);
     } else {
-      navigation.navigate('Application' as never);
+      if (
+        formData.email == 'ilhamhafidz@gmail.com' &&
+        formData.password == 'password'
+      ) {
+        navigation.navigate('Application' as never);
+      }
     }
   };
 
