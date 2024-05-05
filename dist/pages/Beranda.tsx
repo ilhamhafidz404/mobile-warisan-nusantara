@@ -9,6 +9,7 @@ import {
   View,
   ScrollView,
   TouchableOpacity,
+  FlatList,
 } from 'react-native';
 
 // icons
@@ -25,6 +26,7 @@ import {getEvent} from '../api/Event';
 
 // tools
 import {formatDate} from '../tools/dateFormat';
+import Carausel from '../components/Carausel';
 
 // interfaces
 interface NewsItem {
@@ -46,23 +48,24 @@ const Beranda = () => {
 
   const [newsData, setNewsData] = useState<NewsItem[]>([]);
   const [eventData, setEventData] = useState<EventsItem[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loadingGetNews, setLoadingGetNews] = useState(false);
+  const [loadingGetEvents, setLoadingGetEvents] = useState(false);
 
   const getDataNewsData = async () => {
-    setLoading(true);
+    setLoadingGetNews(true);
     let result = await getNews();
     if (result) {
       setNewsData(result.data.Data);
-      setLoading(false);
+      setLoadingGetNews(false);
     }
   };
 
   const getDataEventData = async () => {
-    setLoading(true);
+    setLoadingGetEvents(true);
     let result = await getEvent();
     if (result) {
       setEventData(result.data.Data);
-      setLoading(false);
+      setLoadingGetEvents(false);
     }
   };
 
@@ -71,245 +74,244 @@ const Beranda = () => {
     getDataEventData();
   }, []);
 
+  const data = [
+    {id: 1, title: 'Makanan', icon: 'food-variant'},
+    {id: 2, title: 'Tari', icon: 'dance-ballroom'},
+    {id: 3, title: 'Musik', icon: 'music-clef-treble'},
+    {id: 4, title: 'Arsitektur', icon: 'warehouse'},
+    {id: 5, title: 'Upacara', icon: 'trumpet'},
+    {id: 6, title: 'Bahasa', icon: 'script-text'},
+    {id: 7, title: 'Suku', icon: 'account-group'},
+    {id: 8, title: 'Lainnya', icon: 'apps'},
+    // Tambahkan data lainnya
+  ];
+
   return (
     <ScrollView>
-      <View style={styles.headerContainer}>
-        <Image
-          source={require('./../images/header.jpg')}
-          style={styles.headerImage}
-        />
-        <View style={styles.headerOverflow} />
-        <View style={styles.headerItemContainer}>
-          <View
-            style={{
-              position: 'relative',
-            }}>
-            <TextInput style={styles.headerSearch} placeholder="Search..." />
-            <FeatherIcon
-              name="search"
-              size={25}
-              color={'#ef4444'}
-              style={styles.headerSearchIcon}
-            />
-          </View>
-          <View style={styles.headerLinksContainer}>
-            <TouchableOpacity
-              style={{
-                alignItems: 'center',
-              }}
-              onPress={() => {
-                navigation.navigate('DetailCategory' as never);
-              }}>
-              <View style={styles.headerLinksItem}>
-                <MaterialCommunityIcon
-                  name="human-female-dance"
-                  size={25}
-                  color={'white'}
-                />
-              </View>
-              <Text style={styles.headerLinksItemText}>Tari</Text>
-            </TouchableOpacity>
+      <Carausel />
 
-            <TouchableOpacity
-              style={{
-                alignItems: 'center',
-              }}
-              onPress={() => {
-                navigation.navigate('DetailCategory' as never);
-              }}>
-              <View style={styles.headerLinksItem}>
-                <FontistoIcon name="music-note" size={25} color={'white'} />
-              </View>
-              <Text style={styles.headerLinksItemText}>Musik</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={{
-                alignItems: 'center',
-              }}
-              onPress={() => {
-                navigation.navigate('DetailCategory' as never);
-              }}>
-              <View style={styles.headerLinksItem}>
-                <FontAwesome6Icon name="bowl-food" size={25} color={'white'} />
-              </View>
-              <Text style={styles.headerLinksItemText}>Makanan</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={{
-                alignItems: 'center',
-              }}
-              onPress={() => {
-                navigation.navigate('DetailCategory' as never);
-              }}>
-              <View style={styles.headerLinksItem}>
-                <MaterialIcon name="architecture" size={25} color={'white'} />
-              </View>
-              <Text style={styles.headerLinksItemText}>Arsitektur</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </View>
-
-      <View style={styles.eventMain}>
-        <View
+      <View
+        style={{
+          backgroundColor: 'white',
+          paddingVertical: 20,
+          marginBottom: 20,
+          borderTopLeftRadius: 20,
+          borderRadius: 20,
+          shadowColor: '#000',
+          shadowOffset: {width: 0, height: 2},
+          shadowOpacity: 0.1,
+          elevation: 1,
+        }}>
+        <Text
           style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            marginBottom: 20,
+            textAlign: 'center',
+            color: '#333',
+            fontWeight: 'bold',
+            fontSize: 20,
+            marginBottom: 25,
           }}>
-          <View style={styles.sectionTitle}>
-            <View style={styles.sectionTitleIcon}>
-              <MaterialIcon name="event" size={15} color={'#fff'} />
-            </View>
-            <Text
-              style={{
-                fontSize: 20,
-                fontWeight: 'bold',
-                color: '#333',
-              }}>
-              Event Budaya
-            </Text>
-          </View>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <Text
-              style={{
-                fontSize: 11,
-                color: '#333',
-              }}>
-              Lainnya
-            </Text>
-            <EntypoIcon
-              name="chevron-small-right"
-              size={15}
-              color={'#ef4444'}
-            />
-          </View>
-        </View>
-
-        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          {eventData.map((item, index) => (
-            <TouchableOpacity
-              key={index}
-              onPress={() => navigation.navigate('Detail' as never)}
-              style={{marginRight: 7}}>
-              <Image
-                source={{
-                  uri: item.image,
-                }}
-                style={styles.eventCardImage}
-              />
-              <View>
-                <Text style={{fontWeight: '500', color: 'black'}}>
-                  {item.title}
-                </Text>
+          WARISAN NUSANTARA
+        </Text>
+        <FlatList
+          data={data}
+          numColumns={4}
+          renderItem={({item, index}: {item: any; index: any}) => {
+            return (
+              <TouchableOpacity
+                style={{
+                  flex: 1,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  marginBottom: item.id <= 4 ? 20 : 0,
+                }}>
                 <View
                   style={{
-                    flexDirection: 'row',
+                    backgroundColor: 'rgba(239, 68, 68, 0.3)',
                     alignItems: 'center',
-                    marginTop: 5,
-                  }}>
-                  <FontistoIcon
-                    name="map-marker-alt"
-                    style={{marginRight: 5}}
-                    size={10}
-                  />
-                  <Text style={{fontSize: 10}}>{item.location}</Text>
-                </View>
-                {/* <View
-                  style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    marginTop: 3,
+                    justifyContent: 'center',
+                    width: 50,
+                    height: 50,
+                    borderRadius: 10,
+                    position: 'relative',
                   }}>
                   <MaterialCommunityIcon
-                    name="timelapse"
-                    size={10}
-                    style={{marginRight: 5}}
+                    name={item.icon}
+                    size={30}
+                    color={'#e63946'}
                   />
-                  <Text style={{fontSize: 10}}>{formatDate('2024-02-09')}</Text>
-                </View> */}
-              </View>
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
-      </View>
-      {/*  */}
-
-      <View style={{marginTop: 80}} />
-
-      {/*  */}
-      <View style={styles.main}>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            marginBottom: 20,
-          }}>
-          <View style={styles.sectionTitle}>
-            <View style={styles.sectionTitleIcon}>
-              <MaterialIcon name="article" size={15} color={'#fff'} />
-            </View>
-            <Text
-              style={{
-                fontSize: 20,
-                fontWeight: 'bold',
-                color: '#333',
-              }}>
-              Ragam Berita
-            </Text>
-          </View>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <Text
-              style={{
-                fontSize: 11,
-                color: '#333',
-              }}>
-              Lainnya
-            </Text>
-            <EntypoIcon
-              name="chevron-small-right"
-              size={15}
-              color={'#ef4444'}
-            />
-          </View>
-        </View>
-
-        {loading ? (
-          <Text
-            style={{
-              textAlign: 'center',
-            }}>
-            Loading...
-          </Text>
-        ) : (
-          newsData.map(item => (
-            // <SkeletonContent isLoading={true}>
-            // </SkeletonContent>
-            <TouchableOpacity
-              key={item.title}
-              style={styles.newsCard}
-              onPress={() => navigation.navigate('Detail' as never)}>
-              <Image
-                source={{
-                  uri: item.image,
-                }}
-                style={styles.newsCardImage}
-              />
-              <View style={{flexShrink: 1}}>
-                <Text style={{fontWeight: '500', color: 'black'}}>
+                </View>
+                <Text
+                  style={{
+                    fontSize: 12,
+                    color: 'black',
+                  }}>
                   {item.title}
                 </Text>
-                <Text style={{marginTop: 5, fontSize: 12}}>
-                  {formatDate(item.date)}
-                </Text>
+              </TouchableOpacity>
+            );
+          }}
+        />
+
+        <View style={{paddingHorizontal: 20, marginTop: 50}}>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              marginBottom: 20,
+            }}>
+            <View style={styles.sectionTitle}>
+              <View style={styles.sectionTitleIcon}>
+                <MaterialIcon name="event" size={15} color={'#e63946'} />
               </View>
-            </TouchableOpacity>
-          ))
-        )}
+              <Text
+                style={{
+                  fontSize: 20,
+                  fontWeight: 'bold',
+                  color: '#333',
+                }}>
+                Event Budaya
+              </Text>
+            </View>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <Text
+                style={{
+                  fontSize: 11,
+                  color: '#333',
+                }}>
+                Lainnya
+              </Text>
+              <EntypoIcon
+                name="chevron-small-right"
+                size={15}
+                color={'#e63946'}
+              />
+            </View>
+          </View>
+
+          <ScrollView
+            horizontal={!loadingGetEvents}
+            showsHorizontalScrollIndicator={false}>
+            {loadingGetEvents ? (
+              <Text
+                style={{
+                  textAlign: 'center',
+                }}>
+                Loading...
+              </Text>
+            ) : (
+              eventData.map((item, index) => (
+                <TouchableOpacity
+                  key={index}
+                  onPress={() => navigation.navigate('Detail' as never)}
+                  style={{marginRight: 7}}>
+                  <Image
+                    source={{
+                      uri: item.image,
+                    }}
+                    style={styles.eventCardImage}
+                  />
+                  <View>
+                    <Text style={{fontWeight: '500', color: 'black'}}>
+                      {item.title}
+                    </Text>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        marginTop: 5,
+                      }}>
+                      <FontistoIcon
+                        name="map-marker-alt"
+                        style={{marginRight: 5}}
+                        size={10}
+                      />
+                      <Text style={{fontSize: 10}}>{item.location}</Text>
+                    </View>
+                  </View>
+                </TouchableOpacity>
+              ))
+            )}
+          </ScrollView>
+        </View>
+
+        {/*  */}
+
+        {/*  */}
+
+        <View style={{marginTop: 20}} />
+
+        {/*  */}
+        <View style={{paddingHorizontal: 20}}>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              marginBottom: 20,
+            }}>
+            <View style={styles.sectionTitle}>
+              <View style={styles.sectionTitleIcon}>
+                <MaterialIcon name="article" size={15} color={'#e63946'} />
+              </View>
+              <Text
+                style={{
+                  fontSize: 20,
+                  fontWeight: 'bold',
+                  color: '#333',
+                }}>
+                Ragam Berita
+              </Text>
+            </View>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <Text
+                style={{
+                  fontSize: 11,
+                  color: '#333',
+                }}>
+                Lainnya
+              </Text>
+              <EntypoIcon
+                name="chevron-small-right"
+                size={15}
+                color={'#e63946'}
+              />
+            </View>
+          </View>
+
+          {loadingGetNews ? (
+            <Text
+              style={{
+                textAlign: 'center',
+              }}>
+              Loading...
+            </Text>
+          ) : (
+            newsData.map(item => (
+              // <SkeletonContent isLoading={true}>
+              // </SkeletonContent>
+              <TouchableOpacity
+                key={item.title}
+                style={styles.newsCard}
+                onPress={() => navigation.navigate('Detail' as never)}>
+                <Image
+                  source={{
+                    uri: item.image,
+                  }}
+                  style={styles.newsCardImage}
+                />
+                <View style={{flexShrink: 1}}>
+                  <Text style={{fontWeight: '500', color: 'black'}}>
+                    {item.title}
+                  </Text>
+                  <Text style={{marginTop: 5, fontSize: 12}}>
+                    {formatDate(item.date)}
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            ))
+          )}
+        </View>
       </View>
 
       <Text style={styles.footer}>Copyright by ALOPE 2024</Text>
@@ -361,7 +363,7 @@ const styles = StyleSheet.create({
   headerLinksItem: {
     width: 50,
     height: 50,
-    backgroundColor: '#ef4444',
+    backgroundColor: '#e63946',
     borderRadius: 100,
     alignItems: 'center',
     justifyContent: 'center',
@@ -378,8 +380,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 7,
     padding: 20,
     backgroundColor: 'white',
-    marginTop: -60,
-    borderRadius: 5,
+    // marginTop: -60,
+    borderRadius: 7,
     shadowColor: '#000',
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.1,
@@ -391,7 +393,7 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: 'white',
     marginTop: -60,
-    borderRadius: 10,
+    borderRadius: 7,
     shadowColor: '#000',
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.1,
@@ -407,7 +409,8 @@ const styles = StyleSheet.create({
     width: 27,
     height: 27,
     borderRadius: 200,
-    backgroundColor: '#ef4444',
+    // backgroundColor: '#e63946',
+    backgroundColor: 'rgba(239, 68, 68, 0.3)',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -445,7 +448,9 @@ const styles = StyleSheet.create({
 
   footer: {
     textAlign: 'center',
-    marginVertical: 20,
+    marginTop: 0,
+    color: '#333',
+    marginBottom: 20,
   },
 });
 

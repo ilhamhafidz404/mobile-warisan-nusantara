@@ -174,6 +174,7 @@ const styles = StyleSheet.create({
   },
   paragraph: {
     marginTop: 10,
+    color: 'black',
   },
 
   //

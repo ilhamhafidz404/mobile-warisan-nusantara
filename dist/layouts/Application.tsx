@@ -10,6 +10,9 @@ import Account from '../pages/Account';
 // icons
 import FaIcon from 'react-native-vector-icons/FontAwesome';
 import FoundationIcon from 'react-native-vector-icons/Foundation';
+import IonIcon from 'react-native-vector-icons/Ionicons';
+import Content from '../pages/Content';
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 
 const Tab = createBottomTabNavigator();
 
@@ -27,6 +30,34 @@ const Application = () => {
           tabBarIcon: ({focused}) => (
             <FoundationIcon
               name={focused ? 'home' : 'home'}
+              size={20}
+              color={focused ? '#ef4444' : '#b3b3b3'}
+            />
+          ),
+          // headerRight: () => (
+          //   <MaterialIcon
+          //     name="notifications"
+          //     color="#fff"
+          //     size={20}
+          //     style={{
+          //       marginRight: 10,
+          //     }}
+          //     onPress={() => {}}
+          //   />
+          // ),
+        }}
+      />
+      <Tab.Screen
+        name="Content"
+        component={Content}
+        options={{
+          title: 'Konten',
+          headerStyle: {backgroundColor: '#181818'},
+          headerTintColor: '#fff',
+          tabBarActiveTintColor: '#ef4444',
+          tabBarIcon: ({focused}) => (
+            <IonIcon
+              name={focused ? 'newspaper' : 'newspaper'}
               size={20}
               color={focused ? '#ef4444' : '#b3b3b3'}
             />
