@@ -30,9 +30,9 @@ const Detail = () => {
   const getDataNewsById = async () => {
     let result = await getNewsById();
 
-    if (result) {
-      setData(result.data.Data);
-    }
+    // if (result) {
+    //   setData(result.data.Data);
+    // }
   };
 
   useEffect(() => {
@@ -49,10 +49,15 @@ const Detail = () => {
         <View style={styles.headerOverflow} />
         <View style={styles.headerText}>
           <View style={styles.headerBadgeCategory}>
-            <Text style={styles.headerBadgeCategoryText}>{data.category}</Text>
+            <Text style={styles.headerBadgeCategoryText}>
+              {data.category ? data.category : 'Seni Tari'}
+            </Text>
           </View>
-          <Text style={styles.headerTextTitle}>{data.title}</Text>
-          <Text style={styles.headerTextDate}>{formatDate(data.date)}</Text>
+          <Text style={styles.headerTextTitle}>
+            {data.title ? data.title : 'Pagelaran Seni Tari Budaya di Semarang'}
+          </Text>
+          {/* <Text style={styles.headerTextDate}>{formatDate(data.date)}</Text> */}
+          <Text style={styles.headerTextDate}>{'24 Mei 2024'}</Text>
         </View>
       </View>
 
@@ -64,7 +69,9 @@ const Detail = () => {
             }}
             style={styles.authorImage}
           />
-          <Text style={styles.authorName}>{data.author}</Text>
+          <Text style={styles.authorName}>
+            {data.author ? data.author : 'Jessica'}
+          </Text>
         </View>
         <Text style={styles.paragraph}>{data.body}</Text>
         <Text style={styles.paragraph}>
@@ -167,10 +174,13 @@ const styles = StyleSheet.create({
     width: 45,
     height: 45,
     borderRadius: 100,
+    borderWidth: 1,
+    borderColor: '#111',
   },
   authorName: {
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: 14,
+    color: '#111',
   },
   paragraph: {
     marginTop: 10,
@@ -181,7 +191,9 @@ const styles = StyleSheet.create({
 
   footer: {
     textAlign: 'center',
-    marginVertical: 20,
+    marginTop: 20,
+    color: '#111',
+    marginBottom: 30,
   },
 });
 

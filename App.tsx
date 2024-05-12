@@ -51,14 +51,14 @@ function App() {
               headerTintColor: '#fff',
               headerStyle: {backgroundColor: '#181818'},
               headerBackVisible: true,
-              headerRight: () => (
-                <FontAwesome5Icon
-                  name="bars"
-                  color="#fff"
-                  size={15}
-                  onPress={() => {}}
-                />
-              ),
+              // headerRight: () => (
+              //   <FontAwesome5Icon
+              //     name="bars"
+              //     color="#fff"
+              //     size={15}
+              //     onPress={() => {}}
+              //   />
+              // ),
             }}
           />
           <Stack.Screen

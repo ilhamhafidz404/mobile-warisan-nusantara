@@ -5,19 +5,21 @@ export default function Carausel() {
   const carauselData = [
     {
       id: 1,
-      image: require('./../images/header1.jpg'),
+      title: 'Seren Taun',
+      subtitle: 'Upacara adat panen padi masyarakat Sunda',
+      image: require('./../images/serentaun.jpg'),
     },
     {
       id: 2,
-      image: require('./../images/header2.jpg'),
+      title: 'Gamelan',
+      subtitle: 'Alat musik tradisional Jawa dan Bali',
+      image: require('./../images/header1.jpg'),
     },
     {
       id: 3,
-      image: require('./../images/header3.jpg'),
-    },
-    {
-      id: 4,
-      image: require('./../images/header4.jpg'),
+      title: 'Nasi Liwet',
+      subtitle: 'Dimasak dalam santan, disajikan dengan berbagai lauk pauk',
+      image: require('./../images/nasiliwet.jpg'),
     },
   ];
 
@@ -51,10 +53,15 @@ export default function Carausel() {
             backgroundColor: 'rgba(0, 0, 0, 0.4)',
           }}>
           <Text style={{fontSize: 19, color: 'white', fontWeight: 'bold'}}>
-            Seren Taun
+            {item.title}
           </Text>
-          <Text style={{fontSize: 13, color: 'white'}}>
-            Upacara adat dari Cigugur, Kuningan
+          <Text
+            style={{
+              fontSize: 13,
+              color: 'white',
+              maxWidth: Dimensions.get('window').width - 100,
+            }}>
+            {item.subtitle}
           </Text>
         </View>
       </View>
@@ -92,7 +99,7 @@ export default function Carausel() {
               width: 10,
               height: 10,
               borderRadius: 10,
-              backgroundColor: 'rgba(239, 68, 68, 0.6)',
+              backgroundColor: 'rgba(239, 68, 68, 0.4)',
             }}></View>
         );
       }

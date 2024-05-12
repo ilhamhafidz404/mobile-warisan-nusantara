@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 
 // icons
-import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+// import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import FontistoIcon from 'react-native-vector-icons/Fontisto';
 // import FontAwesome6Icon from 'react-native-vector-icons/FontAwesome6';

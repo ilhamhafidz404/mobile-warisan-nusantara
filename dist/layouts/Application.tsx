@@ -64,7 +64,7 @@ const Application = () => {
           ),
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Account"
         component={Account}
         options={{
@@ -80,7 +80,7 @@ const Application = () => {
             />
           ),
         }}
-      />
+      /> */}
     </Tab.Navigator>
   );
 };

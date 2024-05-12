@@ -17,7 +17,7 @@ export const getNews = async () => {
 export const getNewsById = async () => {
   try {
     let result = await axios.get(
-      `https://run.mocky.io/v3/2989b64f-ea7c-43bb-b1d5-986d2de4128a`,
+      `https://run.mocky.io/v3/83b4d0d4-55e8-4526-802e-a49777cf50fc`,
     );
 
     if (result) {
