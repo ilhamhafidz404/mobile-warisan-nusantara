@@ -76,6 +76,7 @@ export default function Carausel() {
       if (activeIndex == index) {
         return (
           <View
+            key={index}
             style={{
               width: 10,
               height: 10,
@@ -86,6 +87,7 @@ export default function Carausel() {
       } else {
         return (
           <View
+            key={index}
             style={{
               width: 10,
               height: 10,

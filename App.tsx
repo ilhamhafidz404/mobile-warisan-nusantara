@@ -4,11 +4,11 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 // pages
-import Login from './dist/pages/Login';
-import Register from './dist/pages/Register';
+// import Login from './dist/pages/Login';
+// import Register from './dist/pages/Register';
 import Detail from './dist/pages/Detail';
 import Application from './dist/layouts/Application';
-import Introduce from './dist/pages/Introduce';
+// import Introduce from './dist/pages/Introduce';
 
 // icons
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
@@ -21,7 +21,7 @@ function App() {
     <SafeAreaProvider>
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen
+          {/* <Stack.Screen
             name="Introduce"
             component={Introduce}
             options={{headerShown: false}}
@@ -35,7 +35,7 @@ function App() {
             name="Register"
             component={Register}
             options={{headerShown: false}}
-          />
+          /> */}
           <Stack.Screen
             name="Application"
             component={Application}

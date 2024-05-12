@@ -16,8 +16,8 @@ import {
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import FontistoIcon from 'react-native-vector-icons/Fontisto';
-import FontAwesome6Icon from 'react-native-vector-icons/FontAwesome6';
-import FeatherIcon from 'react-native-vector-icons/Feather';
+// import FontAwesome6Icon from 'react-native-vector-icons/FontAwesome6';
+// import FeatherIcon from 'react-native-vector-icons/Feather';
 import EntypoIcon from 'react-native-vector-icons/Entypo';
 
 // apis
@@ -27,6 +27,7 @@ import {getEvent} from '../api/Event';
 // tools
 import {formatDate} from '../tools/dateFormat';
 import Carausel from '../components/Carausel';
+import CategoryList from '../components/CategoryList';
 
 // interfaces
 interface NewsItem {
@@ -112,45 +113,8 @@ const Beranda = () => {
           }}>
           WARISAN NUSANTARA
         </Text>
-        <FlatList
-          data={data}
-          numColumns={4}
-          renderItem={({item, index}: {item: any; index: any}) => {
-            return (
-              <TouchableOpacity
-                style={{
-                  flex: 1,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  marginBottom: item.id <= 4 ? 20 : 0,
-                }}>
-                <View
-                  style={{
-                    backgroundColor: 'rgba(239, 68, 68, 0.3)',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    width: 50,
-                    height: 50,
-                    borderRadius: 10,
-                    position: 'relative',
-                  }}>
-                  <MaterialCommunityIcon
-                    name={item.icon}
-                    size={30}
-                    color={'#e63946'}
-                  />
-                </View>
-                <Text
-                  style={{
-                    fontSize: 12,
-                    color: 'black',
-                  }}>
-                  {item.title}
-                </Text>
-              </TouchableOpacity>
-            );
-          }}
-        />
+
+        <CategoryList />
 
         <View style={{paddingHorizontal: 20, marginTop: 50}}>
           <View
@@ -234,13 +198,9 @@ const Beranda = () => {
             )}
           </ScrollView>
         </View>
-
         {/*  */}
-
         {/*  */}
-
         <View style={{marginTop: 20}} />
-
         {/*  */}
         <View style={{paddingHorizontal: 20}}>
           <View

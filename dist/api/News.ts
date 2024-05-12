@@ -3,7 +3,7 @@ import axios from 'axios';
 export const getNews = async () => {
   try {
     let result = await axios.get(
-      `https://run.mocky.io/v3/750cd11c-9982-493c-9b51-382f1a9151c1`,
+      `https://run.mocky.io/v3/4c3c6a2c-0d34-4b7d-8b13-bfe49edbf51f`,
     );
 
     if (result) {
