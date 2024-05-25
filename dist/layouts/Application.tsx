@@ -1,18 +1,14 @@
 import React from 'react';
 
-// import {NavigationContainer} from '@react-navigation/native';
-// import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import Beranda from '../pages/Beranda';
-import Account from '../pages/Account';
 
 // icons
 import FaIcon from 'react-native-vector-icons/FontAwesome';
 import FoundationIcon from 'react-native-vector-icons/Foundation';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import Content from '../pages/Content';
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 
 const Tab = createBottomTabNavigator();
 
@@ -24,8 +20,8 @@ const Application = () => {
         component={Beranda}
         options={{
           title: 'Beranda',
-          headerStyle: {backgroundColor: '#181818'},
-          headerTintColor: '#fff',
+          headerStyle: {backgroundColor: '#fff'},
+          headerTintColor: '#D63447',
           tabBarActiveTintColor: '#ef4444',
           tabBarIcon: ({focused}) => (
             <FoundationIcon
@@ -34,17 +30,17 @@ const Application = () => {
               color={focused ? '#ef4444' : '#b3b3b3'}
             />
           ),
-          // headerRight: () => (
-          //   <MaterialIcon
-          //     name="notifications"
-          //     color="#fff"
-          //     size={20}
-          //     style={{
-          //       marginRight: 10,
-          //     }}
-          //     onPress={() => {}}
-          //   />
-          // ),
+          headerRight: () => (
+            <FaIcon
+              name="bell-o"
+              color="#D63447"
+              size={20}
+              style={{
+                marginRight: 10,
+              }}
+              onPress={() => {}}
+            />
+          ),
         }}
       />
       <Tab.Screen
@@ -52,8 +48,8 @@ const Application = () => {
         component={Content}
         options={{
           title: 'Konten',
-          headerStyle: {backgroundColor: '#181818'},
-          headerTintColor: '#fff',
+          headerStyle: {backgroundColor: '#fff'},
+          headerTintColor: '#D63447',
           tabBarActiveTintColor: '#ef4444',
           tabBarIcon: ({focused}) => (
             <IonIcon
@@ -62,25 +58,19 @@ const Application = () => {
               color={focused ? '#ef4444' : '#b3b3b3'}
             />
           ),
-        }}
-      />
-      {/* <Tab.Screen
-        name="Account"
-        component={Account}
-        options={{
-          title: 'Akun',
-          headerStyle: {backgroundColor: '#181818'},
-          headerTintColor: '#fff',
-          tabBarActiveTintColor: '#ef4444',
-          tabBarIcon: ({focused}) => (
+          headerRight: () => (
             <FaIcon
-              name={focused ? 'user-circle' : 'user-circle-o'}
+              name="bell-o"
+              color="#D63447"
               size={20}
-              color={focused ? '#ef4444' : '#b3b3b3'}
+              style={{
+                marginRight: 10,
+              }}
+              onPress={() => {}}
             />
           ),
         }}
-      /> */}
+      />
     </Tab.Navigator>
   );
 };

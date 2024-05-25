@@ -2,7 +2,6 @@ import {View, Text} from 'react-native';
 import React from 'react';
 
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
-import {BorderlessButton} from 'react-native-gesture-handler';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -36,7 +35,7 @@ export default function Content() {
   return (
     <Tab.Navigator
       screenOptions={{
-        tabBarIndicatorStyle: {backgroundColor: '#e63946'},
+        tabBarIndicatorStyle: {backgroundColor: '#D63447'},
       }}>
       <Tab.Screen name="Berita" component={Hello} />
       <Tab.Screen name="Event" component={Hello} />

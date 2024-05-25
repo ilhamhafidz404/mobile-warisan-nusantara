@@ -5,19 +5,15 @@ import {
   Image,
   StyleSheet,
   Text,
-  TextInput,
   View,
   ScrollView,
   TouchableOpacity,
-  FlatList,
 } from 'react-native';
 
 // icons
-// import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import FontistoIcon from 'react-native-vector-icons/Fontisto';
-// import FontAwesome6Icon from 'react-native-vector-icons/FontAwesome6';
-// import FeatherIcon from 'react-native-vector-icons/Feather';
 import EntypoIcon from 'react-native-vector-icons/Entypo';
 
 // apis
@@ -28,6 +24,7 @@ import {getEvent} from '../api/Event';
 import {formatDate} from '../tools/dateFormat';
 import Carausel from '../components/Carausel';
 import CategoryList from '../components/CategoryList';
+import NewsCategory from '../components/NewsCategory';
 
 // interfaces
 interface NewsItem {
@@ -75,18 +72,6 @@ const Beranda = () => {
     getDataEventData();
   }, []);
 
-  const data = [
-    {id: 1, title: 'Makanan', icon: 'food-variant'},
-    {id: 2, title: 'Tari', icon: 'dance-ballroom'},
-    {id: 3, title: 'Musik', icon: 'music-clef-treble'},
-    {id: 4, title: 'Arsitektur', icon: 'warehouse'},
-    {id: 5, title: 'Upacara', icon: 'trumpet'},
-    {id: 6, title: 'Bahasa', icon: 'script-text'},
-    {id: 7, title: 'Suku', icon: 'account-group'},
-    {id: 8, title: 'Lainnya', icon: 'apps'},
-    // Tambahkan data lainnya
-  ];
-
   return (
     <ScrollView>
       <Carausel />
@@ -126,7 +111,7 @@ const Beranda = () => {
             }}>
             <View style={styles.sectionTitle}>
               <View style={styles.sectionTitleIcon}>
-                <MaterialIcon name="event" size={15} color={'#e63946'} />
+                <MaterialIcon name="event" size={20} color={'#fff'} />
               </View>
               <Text
                 style={{
@@ -183,6 +168,17 @@ const Beranda = () => {
                       style={{
                         flexDirection: 'row',
                         alignItems: 'center',
+                        gap: 3,
+                      }}>
+                      <MaterialIcon name="calendar-today" color={'#EC5F5F'} />
+                      <Text style={{color: '#D9D9D9', fontSize: 12}}>
+                        17 sep 2024
+                      </Text>
+                    </View>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        alignItems: 'center',
                         marginTop: 5,
                       }}>
                       <FontistoIcon
@@ -208,11 +204,11 @@ const Beranda = () => {
               flexDirection: 'row',
               justifyContent: 'space-between',
               alignItems: 'center',
-              marginBottom: 20,
+              marginBottom: 15,
             }}>
             <View style={styles.sectionTitle}>
               <View style={styles.sectionTitleIcon}>
-                <MaterialIcon name="article" size={15} color={'#e63946'} />
+                <MaterialIcon name="article" size={20} color={'#fff'} />
               </View>
               <Text
                 style={{
@@ -239,6 +235,8 @@ const Beranda = () => {
             </View>
           </View>
 
+          <NewsCategory />
+
           {loadingGetNews ? (
             <Text
               style={{
@@ -248,8 +246,6 @@ const Beranda = () => {
             </Text>
           ) : (
             newsData.map(item => (
-              // <SkeletonContent isLoading={true}>
-              // </SkeletonContent>
               <TouchableOpacity
                 key={item.title}
                 style={styles.newsCard}
@@ -261,9 +257,36 @@ const Beranda = () => {
                   style={styles.newsCardImage}
                 />
                 <View style={{flexShrink: 1}}>
+                  <View
+                    style={{
+                      backgroundColor: '#F6F7FA',
+                      paddingVertical: 2,
+                      paddingHorizontal: 5,
+                      borderRadius: 6,
+                      height: 23,
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      width: 70,
+                      marginBottom: 3,
+                    }}>
+                    <Text style={{color: '#9D9FA0', fontSize: 12}}>
+                      Category
+                    </Text>
+                  </View>
                   <Text style={{fontWeight: '500', color: 'black'}}>
                     {item.title}
                   </Text>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      gap: 5,
+                    }}>
+                    <MaterialCommunityIcon name="eye" color="#9D9FA0" />
+                    <Text style={{color: '#9D9FA0', fontSize: 12}}>
+                      1234 views
+                    </Text>
+                  </View>
                   <Text style={{marginTop: 5, fontSize: 12}}>
                     {formatDate(item.date)}
                   </Text>
@@ -366,11 +389,11 @@ const styles = StyleSheet.create({
     gap: 7,
   },
   sectionTitleIcon: {
-    width: 27,
-    height: 27,
-    borderRadius: 200,
-    // backgroundColor: '#e63946',
-    backgroundColor: 'rgba(239, 68, 68, 0.3)',
+    width: 30,
+    height: 30,
+    borderRadius: 10,
+    backgroundColor: '#D63447',
+    // backgroundColor: 'rgba(239, 68, 68, 0.3)',
     alignItems: 'center',
     justifyContent: 'center',
   },

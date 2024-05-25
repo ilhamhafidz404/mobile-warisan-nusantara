@@ -46,11 +46,8 @@ export default function Carausel() {
             position: 'absolute',
             bottom: 50,
             left: 0,
-            borderLeftColor: '#e63946',
-            borderLeftWidth: 3,
             paddingHorizontal: 10,
             paddingVertical: 10,
-            backgroundColor: 'rgba(0, 0, 0, 0.4)',
           }}>
           <Text style={{fontSize: 19, color: 'white', fontWeight: 'bold'}}>
             {item.title}
@@ -85,10 +82,10 @@ export default function Carausel() {
           <View
             key={index}
             style={{
-              width: 10,
-              height: 10,
+              width: 7,
+              height: 7,
               borderRadius: 10,
-              backgroundColor: '#e63946',
+              backgroundColor: '#FFFFFF',
             }}></View>
         );
       } else {
@@ -96,10 +93,11 @@ export default function Carausel() {
           <View
             key={index}
             style={{
-              width: 10,
-              height: 10,
+              width: 5,
+              height: 5,
               borderRadius: 10,
-              backgroundColor: 'rgba(239, 68, 68, 0.4)',
+              backgroundColor: '#FFFFFF',
+              opacity: 0.5,
             }}></View>
         );
       }
