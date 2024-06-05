@@ -7,6 +7,9 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 import Detail from './dist/pages/Detail';
 import Application from './dist/layouts/Application';
 
+// icons
+import FaIcon from 'react-native-vector-icons/FontAwesome';
+
 const Stack = createNativeStackNavigator();
 
 function App() {
@@ -25,10 +28,20 @@ function App() {
             name="Detail"
             component={Detail}
             options={{
-              title: 'Detail Berita',
-              headerTintColor: '#fff',
-              headerStyle: {backgroundColor: '#181818'},
-              headerBackVisible: true,
+              title: 'DetailBerita',
+              headerStyle: {backgroundColor: '#fff'},
+              headerTintColor: '#D63447',
+              headerRight: () => (
+                <FaIcon
+                  name="bell-o"
+                  color="#D63447"
+                  size={20}
+                  style={{
+                    marginRight: 10,
+                  }}
+                  onPress={() => {}}
+                />
+              ),
             }}
           />
         </Stack.Navigator>

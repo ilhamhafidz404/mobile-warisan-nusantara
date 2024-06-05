@@ -171,7 +171,7 @@ const Beranda = () => {
                         gap: 3,
                       }}>
                       <MaterialIcon name="calendar-today" color={'#EC5F5F'} />
-                      <Text style={{color: '#D9D9D9', fontSize: 12}}>
+                      <Text style={{color: '#9D9FA0', fontSize: 12}}>
                         17 sep 2024
                       </Text>
                     </View>

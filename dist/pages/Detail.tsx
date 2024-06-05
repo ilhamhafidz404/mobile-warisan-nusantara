@@ -6,13 +6,14 @@ import {
   Text,
   View,
   ScrollView,
+  TouchableOpacity,
 } from 'react-native';
 
 // apis
 import {getNewsById} from '../api/News';
 
-// tools
-import {formatDate} from '../tools/dateFormat';
+// icons
+import FontistoIcon from 'react-native-vector-icons/Fontisto';
 
 interface NewsData {
   id?: number;
@@ -47,6 +48,24 @@ const Detail = () => {
           style={styles.headerImage}
         />
         <View style={styles.headerOverflow} />
+      </View>
+
+      <View style={styles.main}>
+        <TouchableOpacity
+          style={{
+            backgroundColor: '#ef4444',
+            width: 50,
+            height: 50,
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderRadius: 25,
+            position: 'absolute',
+            right: 0,
+            top: -25,
+            marginRight: 20,
+          }}>
+          <FontistoIcon name="share" color={'white'} size={20} />
+        </TouchableOpacity>
         <View style={styles.headerText}>
           <View style={styles.headerBadgeCategory}>
             <Text style={styles.headerBadgeCategoryText}>
@@ -54,24 +73,12 @@ const Detail = () => {
             </Text>
           </View>
           <Text style={styles.headerTextTitle}>
-            {data.title ? data.title : 'Pagelaran Seni Tari Budaya di Semarang'}
+            {data.title
+              ? data.title
+              : 'Pagelaran Seni Musik Budaya di Semarang'}
           </Text>
           {/* <Text style={styles.headerTextDate}>{formatDate(data.date)}</Text> */}
           <Text style={styles.headerTextDate}>{'24 Mei 2024'}</Text>
-        </View>
-      </View>
-
-      <View style={styles.main}>
-        <View style={styles.author}>
-          <Image
-            source={{
-              uri: 'https://cdn.vox-cdn.com/thumbor/T3bE8Mhr14dqhJDkvOMz56EBHuo=/0x0:4000x6000/1120x0/filters:focal(0x0:4000x6000):format(webp):no_upscale()/cdn.vox-cdn.com/uploads/chorus_asset/file/9637713/Fillipovic__Jill__cr_Gary_He_.jpeg',
-            }}
-            style={styles.authorImage}
-          />
-          <Text style={styles.authorName}>
-            {data.author ? data.author : 'Jessica'}
-          </Text>
         </View>
         <Text style={styles.paragraph}>{data.body}</Text>
         <Text style={styles.paragraph}>
@@ -112,29 +119,29 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   headerImage: {
-    height: 500,
+    height: 300,
     width: Dimensions.get('window').width,
   },
   headerOverflow: {
-    height: 500,
+    height: 300,
     width: Dimensions.get('window').width,
     backgroundColor: '#000',
     position: 'absolute',
     opacity: 0.4,
   },
   headerText: {
-    position: 'absolute',
-    left: 10,
-    bottom: 85,
+    // position: 'absolute',
+    // left: 10,
+    // bottom: 85,
   },
   headerTextTitle: {
     fontSize: 25,
     fontWeight: 'bold',
-    color: 'white',
+    color: 'black',
   },
   headerTextDate: {
     fontSize: 13,
-    color: 'white',
+    color: '#555',
     marginTop: 10,
   },
   headerBadgeCategoryText: {
@@ -153,6 +160,7 @@ const styles = StyleSheet.create({
   //
 
   main: {
+    position: 'relative',
     marginHorizontal: 7,
     padding: 20,
     backgroundColor: 'white',
