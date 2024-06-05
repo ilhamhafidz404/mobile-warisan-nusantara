@@ -43,7 +43,7 @@ const Detail = () => {
     <ScrollView>
       <View style={styles.headerContainer}>
         <Image
-          source={require('./../images/news/tari.jpeg')}
+          source={require('./../images/header1.jpg')}
           style={styles.headerImage}
         />
         <View style={styles.headerOverflow} />
