@@ -36,7 +36,7 @@ const Application = () => {
                 name="bell"
                 color="#D63447"
                 size={20}
-                style={{marginRight: 10}}
+                style={{marginRight: 18}}
               />
             </TouchableOpacity>
           ),
