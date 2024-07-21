@@ -2,9 +2,7 @@ import axios from 'axios';
 
 export const getEvent = async () => {
   try {
-    let result = await axios.get(
-      `https://run.mocky.io/v3/ef8d6c1f-7dc3-4feb-86df-d284ef999db7`,
-    );
+    let result = await axios.get(`http://127.0.0.1:8000/api/event?limit=3`);
 
     if (result) {
       return result;

@@ -1,14 +1,13 @@
 import React from 'react';
-
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-
 import Beranda from '../pages/Beranda';
 
 // icons
-import FaIcon from 'react-native-vector-icons/FontAwesome';
+import OcticonsIcon from 'react-native-vector-icons/Octicons';
 import FoundationIcon from 'react-native-vector-icons/Foundation';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import Content from '../pages/Content';
+import {TouchableOpacity} from 'react-native';
 
 const Tab = createBottomTabNavigator();
 
@@ -18,7 +17,7 @@ const Application = () => {
       <Tab.Screen
         name="Home"
         component={Beranda}
-        options={{
+        options={({navigation}) => ({
           title: 'Beranda',
           headerStyle: {backgroundColor: '#fff'},
           headerTintColor: '#D63447',
@@ -31,22 +30,22 @@ const Application = () => {
             />
           ),
           headerRight: () => (
-            <FaIcon
-              name="bell-o"
-              color="#D63447"
-              size={20}
-              style={{
-                marginRight: 10,
-              }}
-              onPress={() => {}}
-            />
+            <TouchableOpacity
+              onPress={() => navigation.navigate('Notification')}>
+              <OcticonsIcon
+                name="bell"
+                color="#D63447"
+                size={20}
+                style={{marginRight: 10}}
+              />
+            </TouchableOpacity>
           ),
-        }}
+        })}
       />
       <Tab.Screen
         name="Content"
         component={Content}
-        options={{
+        options={({navigation}) => ({
           title: 'Konten',
           headerStyle: {backgroundColor: '#fff'},
           headerTintColor: '#D63447',
@@ -59,17 +58,17 @@ const Application = () => {
             />
           ),
           headerRight: () => (
-            <FaIcon
-              name="bell-o"
-              color="#D63447"
-              size={20}
-              style={{
-                marginRight: 10,
-              }}
-              onPress={() => {}}
-            />
+            <TouchableOpacity
+              onPress={() => navigation.navigate('Notification')}>
+              <OcticonsIcon
+                name="bell"
+                color="#D63447"
+                size={20}
+                style={{marginRight: 10}}
+              />
+            </TouchableOpacity>
           ),
-        }}
+        })}
       />
     </Tab.Navigator>
   );

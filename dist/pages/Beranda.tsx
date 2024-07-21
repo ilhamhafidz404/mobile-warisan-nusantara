@@ -62,7 +62,8 @@ const Beranda = () => {
     setLoadingGetEvents(true);
     let result = await getEvent();
     if (result) {
-      setEventData(result.data.Data);
+      setEventData(result.data.data);
+
       setLoadingGetEvents(false);
     }
   };

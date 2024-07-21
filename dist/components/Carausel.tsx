@@ -77,7 +77,7 @@ export default function Carausel() {
 
   const renderDotIndicators = () => {
     return carauselData.map((dot, index) => {
-      if (activeIndex == index) {
+      if (Math.round(activeIndex) == index) {
         return (
           <View
             key={index}

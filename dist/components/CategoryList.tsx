@@ -1,9 +1,11 @@
+import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {Image} from 'react-native';
 import {TouchableOpacity, View, Text} from 'react-native';
-import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const CategoryList = () => {
+  const navigation = useNavigation();
+
   const data = [
     {id: 1, title: 'Makanan', icon: require('./../images/icons/makanan.png')},
     {id: 2, title: 'Musik', icon: require('./../images/icons/musik.png')},
@@ -22,6 +24,7 @@ const CategoryList = () => {
       {data.map((item, index) => (
         <TouchableOpacity
           key={index}
+          onPress={() => navigation.navigate('List' as never)}
           style={{
             width: '20%',
             justifyContent: 'center',
